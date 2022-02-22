@@ -60,18 +60,10 @@ uint8_t digit[4][3] = {
 };
 
 // iskoristen kod s interneta samo za prikaz na LCD
-char *convert(uint8_t *a) {
-	char* buffer2;
-	int i;
-
-	buffer2 = malloc(9);
-	if (!buffer2) return NULL;
-
-	buffer2[8] = 0;
-	for (i = 0; i <= 7; i++) buffer2[7 - i] = (((*a) >> i) & (0x01)) + '0';
-
-	puts(buffer2);
-	return buffer2;
+char convert(uint8_t *a) {
+	if (*a == 0x0F) return '*';
+	else if (*a == 0xF0) return '#';
+	else return *a + '0';
 }
 
 void Col_init() {
